@@ -835,7 +835,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.remove('horror-theme');
             body.classList.add('light-theme');
             modeText.textContent = '';
-            document.title = 'Alien Signal';
+            document.title = '외계인 전파 수신소';
             
             // 제목 변경 및 글리치 효과 제거
             titleElement.textContent = 'Alien Signal';
