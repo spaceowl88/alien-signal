@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>별 배경 이미지 생성</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starsCanvas" width="1000" height="1000"></canvas>
+    <canvas id="twinklingCanvas" width="1000" height="1000"></canvas>
+    
+    <script>
+        // 별 캔버스 생성
+        const starsCanvas = document.getElementById('starsCanvas');
+        const starsCtx = starsCanvas.getContext('2d');
+        starsCtx.fillStyle = 'transparent';
+        starsCtx.fillRect(0, 0, starsCanvas.width, starsCanvas.height);
+        
+        // 별 그리기
+        for (let i = 0; i < 300; i++) {
+            const x = Math.random() * starsCanvas.width;
+            const y = Math.random() * starsCanvas.height;
+            const radius = Math.random() * 1.5;
+            const opacity = Math.random() * 0.8 + 0.2;
+            
+            starsCtx.beginPath();
+            starsCtx.arc(x, y, radius, 0, Math.PI * 2);
+            starsCtx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            starsCtx.fill();
+        }
+        
+        // 반짝이는 별 캔버스 생성
+        const twinklingCanvas = document.getElementById('twinklingCanvas');
+        const twinklingCtx = twinklingCanvas.getContext('2d');
+        twinklingCtx.fillStyle = 'transparent';
+        twinklingCtx.fillRect(0, 0, twinklingCanvas.width, twinklingCanvas.height);
+        
+        // 반짝이는 별 그리기
+        for (let i = 0; i < 100; i++) {
+            const x = Math.random() * twinklingCanvas.width;
+            const y = Math.random() * twinklingCanvas.height;
+            const radius = Math.random() * 2 + 1;
+            const opacity = Math.random() * 0.5 + 0.3;
+            
+            // 별 그리기
+            twinklingCtx.beginPath();
+            twinklingCtx.arc(x, y, radius, 0, Math.PI * 2);
+            twinklingCtx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            twinklingCtx.fill();
+            
+            // 별빛 효과
+            const glow = twinklingCtx.createRadialGradient(x, y, 0, x, y, radius * 3);
+            glow.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
+            glow.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            
+            twinklingCtx.beginPath();
+            twinklingCtx.arc(x, y, radius * 3, 0, Math.PI * 2);
+            twinklingCtx.fillStyle = glow;
+            twinklingCtx.fill();
+        }
+        
+        // 이미지 저장 방법을 콘솔에 출력
+        console.log('별 배경 이미지와 반짝이는 별 이미지를 생성했습니다.');
+        console.log('브라우저에서 각 캔버스를 오른쪽 클릭하여 "이미지 저장" 옵션을 선택하여 저장하세요.');
+        console.log('stars.png와 twinkling.png로 저장한 후 assets 폴더에 넣어주세요.');
+    </script>
+</body>
+</html> 
